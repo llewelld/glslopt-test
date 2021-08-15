@@ -9,6 +9,9 @@ Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  rust
 BuildRequires:  rust-std-static
 BuildRequires:  cargo
+BuildRequires:  cbindgen
+BuildRequires:  llvm
+BuildRequires:  clang-devel
 
 %description
 %{summary}.
