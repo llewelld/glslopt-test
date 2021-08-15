@@ -1,0 +1,3 @@
+[submodule "vendor/cc"]
+	path = vendor/cc
+	url = https://github.com/alexcrichton/cc-rs

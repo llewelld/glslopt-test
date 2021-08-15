@@ -42,8 +42,8 @@ CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
 rm -rf %{buildroot}
 mkdir -p %{buildroot}%{_libdir}/rust/
 cp "%BUILD_DIR"/release/libglslopt.rlib %{buildroot}%{_libdir}/rust/
-mkdir -p %{buildroot}%{_bindir}/test
-cp "%BUILD_DIR"/test %{buildroot}%{_bindir}/test/
+#mkdir -p %{buildroot}%{_bindir}/test
+#cp "%BUILD_DIR"/test %{buildroot}%{_bindir}/test/
 
 %files
 %defattr(-,root,root,-)
