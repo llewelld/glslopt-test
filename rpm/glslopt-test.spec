@@ -33,11 +33,11 @@ mkdir -p "%BUILD_DIR"
 # Create a link to the stdc++ include directory
 %ifarch %arm
 echo Creating include link in "%BUILD_DIR"/include
-if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
+#if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
 %endif
 
 # Build the crate
-CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
+RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
 
 # Build the test c++ file
 #host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test

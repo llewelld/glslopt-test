@@ -27,7 +27,7 @@ fn is_486_target() -> bool {
     let mut is_486_target = false;
     match env::var("TARGET") {
         Ok(val) => is_486_target = val == "i686-unknown-linux-gnu",
-        Err(e) => {},
+        Err(_e) => {},
     }
     return is_486_target;
 }
@@ -36,7 +36,7 @@ fn is_486_sb2() -> bool {
     let mut is_486_sb2 = false;
     match env::var("SB2_TARGET") {
         Ok(val) => is_486_sb2 = val == "i686-unknown-linux-gnu",
-        Err(e) => {},
+        Err(_e) => {},
     }
     return is_486_sb2;
 }
@@ -48,7 +48,7 @@ fn compile(tool: &str, includes: &[&str], file: &str) {
         &path.parent().unwrap().to_str().unwrap());
     let file_out = format!("{}/{}.o", path_out,
         &path.file_stem().unwrap().to_str().unwrap());
-    let magic_include = format!("{}/../../../../include", out_dir);
+    let _magic_include = format!("{}/../../../../include", out_dir);
 
     // Ensure we have an output directory
     Command::new("mkdir")
@@ -60,7 +60,7 @@ fn compile(tool: &str, includes: &[&str], file: &str) {
     // Compile file.c into file.o
     let mut command = Command::new(tool);
     command
-        .args(&["-isystem", &magic_include, "-O0", "-ffunction-sections", "-fdata-sections", "-fPIC", "-g", "-fno-omit-frame-pointer", "-m32", "-march=i686"]);
+        .args(&["-O0", "-ffunction-sections", "-fdata-sections", "-fPIC", "-g", "-fno-omit-frame-pointer", "-m32", "-march=i686"]);
 
     for i in 0..includes.len() {
         command.arg("-I");
