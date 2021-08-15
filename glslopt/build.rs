@@ -383,7 +383,7 @@ fn main() {
         ],
         &[
 //            "glsl-optimizer/src/compiler/glsl_types.cpp",
-            "glsl-optimizer/src/compiler/glsl/ast_array_index.cpp",
+//            "glsl-optimizer/src/compiler/glsl/ast_array_index.cpp",
             "glsl-optimizer/src/compiler/glsl/ast_expr.cpp",
             "glsl-optimizer/src/compiler/glsl/ast_function.cpp",
 //            "glsl-optimizer/src/compiler/glsl/ast_to_hir.cpp",
