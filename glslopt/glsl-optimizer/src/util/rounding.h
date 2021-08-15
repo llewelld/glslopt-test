@@ -24,7 +24,7 @@
 #ifndef _ROUNDING_H
 #define _ROUNDING_H
 
-#include <math.h>
+#include "c99_math.h"
 
 #include <limits.h>
 #include <stdint.h>

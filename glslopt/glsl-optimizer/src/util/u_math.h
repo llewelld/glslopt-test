@@ -39,7 +39,7 @@
 #define U_MATH_H
 
 
-#include <math.h>
+#include "c99_math.h"
 #include <assert.h>
 #include <float.h>
 #include <stdarg.h>
