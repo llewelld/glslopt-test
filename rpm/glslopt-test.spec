@@ -22,6 +22,10 @@ BuildRequires:  clang-devel
 %prep
 %autosetup -p1 -n %{name}-%{version}/glslopt
 
+# Add `.cargo-checksum.json` for each dependency
+find -L ../vendor -mindepth 2 -maxdepth 2 -type f -name Cargo.toml \
+  -exec sh -c 'echo "{\"files\":{ },\"package\":\"\"}" > "$(dirname $0)/.cargo-checksum.json"' '{}' \;
+
 %build
 
 mkdir -p "%BUILD_DIR"
