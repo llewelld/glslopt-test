@@ -30,7 +30,7 @@ if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DI
 %endif
 
 # Build the crate
-CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release
+CARGO_TARGET_DIR="%BUILD_DIR" cargo build --release -vv
 
 # Build the test c++ file
 #host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test
@@ -46,6 +46,6 @@ cp "%BUILD_DIR"/test %{buildroot}%{_bindir}/test/
 %defattr(-,root,root,-)
 %dir %{_libdir}/rust
 %{_libdir}/rust/libglslopt.rlib
-%dir %{_bindir}/test
-%{_bindir}/test/test
+#%dir %{_bindir}/test
+#{_bindir}/test/test
 
