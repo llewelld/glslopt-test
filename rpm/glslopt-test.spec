@@ -30,10 +30,10 @@ if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DI
 %endif
 
 # Build the crate
-#CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release
+CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release
 
 # Build the test c++ file
-host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test
+#host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test
 
 %install
 rm -rf %{buildroot}
