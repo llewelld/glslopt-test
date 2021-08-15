@@ -369,7 +369,7 @@ fn main() {
         ],
         "mesa");
 
-        build("host-g++",
+        build("host-cc",
         &[
             "glsl-optimizer/include",
             "glsl-optimizer/src/mesa",

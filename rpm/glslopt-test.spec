@@ -36,6 +36,19 @@ echo Creating include link in "%BUILD_DIR"/include
 #if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
 %endif
 
+echo "Check for cc1plus in the target"
+echo "/usr"
+find /usr -iname "cc1plus" 2>/dev/null
+echo "/srv"
+find /srv -iname "cc1plus" 2>/dev/null
+echo "Check completed"
+echo "Check for cc1plus in the toolings"
+echo "/usr"
+SBOX_DISABLE_MAPPING=1 find /usr -iname "cc1plus" 2>/dev/null
+echo "/srv"
+SBOX_DISABLE_MAPPING=1 find /srv -iname "cc1plus" 2>/dev/null
+echo "Check completed"
+
 # Build the crate
 RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
 
