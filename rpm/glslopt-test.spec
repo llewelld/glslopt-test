@@ -52,6 +52,7 @@ echo "Tooling include contents"
 SBOX_DISABLE_MAPPING=1 ls -l "%BUILD_DIR"/include/
 %endif
 
+# Check for ccc1plus
 echo "Check for cc1plus in the target"
 echo "/usr"
 find /usr -iname "cc1plus" 2>/dev/null
@@ -64,6 +65,12 @@ SBOX_DISABLE_MAPPING=1 find /usr -iname "cc1plus" 2>/dev/null
 echo "/srv"
 SBOX_DISABLE_MAPPING=1 find /srv -iname "cc1plus" 2>/dev/null
 echo "Check completed"
+
+# Check libclang.s.10 version
+echo "Target libclang.so.10"
+objdump -a /usr/lib/libclang.so.10
+echo "Tooling libclang.so.10"
+SBOX_DISABLE_MAPPING=1 objdump -a /usr/lib/libclang.so.10
 
 # Build the crate
 SB2_TARGET="%SB2_TARGET" RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
