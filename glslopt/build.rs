@@ -48,7 +48,7 @@ fn compile(tool: &str, includes: &[&str], file: &str) {
         &path.parent().unwrap().to_str().unwrap());
     let file_out = format!("{}/{}.o", path_out,
         &path.file_stem().unwrap().to_str().unwrap());
-    let _magic_include = format!("{}/../../../../include", out_dir);
+    let magic_include = format!("{}/../../../../include", out_dir);
 
     // Ensure we have an output directory
     Command::new("mkdir")
@@ -60,7 +60,7 @@ fn compile(tool: &str, includes: &[&str], file: &str) {
     // Compile file.c into file.o
     let mut command = Command::new(tool);
     command
-        .args(&["-O0", "-ffunction-sections", "-fdata-sections", "-fPIC", "-g", "-fno-omit-frame-pointer", "-m32", "-march=i686"]);
+        .args(&["-O0", "-isystem", &magic_include, "-ffunction-sections", "-fdata-sections", "-fPIC", "-g", "-fno-omit-frame-pointer", "-m32", "-march=i686"]);
 
     for i in 0..includes.len() {
         command.arg("-I");
