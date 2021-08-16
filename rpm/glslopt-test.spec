@@ -22,6 +22,18 @@ BuildRequires:  clang-devel
 %prep
 %autosetup -p1 -n %{name}-%{version}/glslopt
 
+%ifarch %arm
+%define SB2_TARGET armv7-unknown-linux-gnueabihf
+%endif
+%ifarch aarch64
+%define SB2_TARGET aarch64-unknown-linux-gnu
+%endif
+%ifarch %ix86
+%define SB2_TARGET i686-unknown-linux-gnu
+%endif
+
+echo "Target is %SB2_TARGET"
+
 # Add `.cargo-checksum.json` for each dependency
 find -L ../vendor -mindepth 2 -maxdepth 2 -type f -name Cargo.toml \
   -exec sh -c 'echo "{\"files\":{ },\"package\":\"\"}" > "$(dirname $0)/.cargo-checksum.json"' '{}' \;
@@ -33,7 +45,7 @@ mkdir -p "%BUILD_DIR"
 # Create a link to the stdc++ include directory
 %ifarch %arm
 echo Creating include link in "%BUILD_DIR"/include
-#if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
+if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
 %endif
 
 echo "Check for cc1plus in the target"
@@ -50,7 +62,7 @@ SBOX_DISABLE_MAPPING=1 find /srv -iname "cc1plus" 2>/dev/null
 echo "Check completed"
 
 # Build the crate
-RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
+SB2_TARGET=%SB2_TARGET" RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
 
 # Build the test c++ file
 #host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test
