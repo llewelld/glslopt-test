@@ -62,7 +62,7 @@ SBOX_DISABLE_MAPPING=1 find /srv -iname "cc1plus" 2>/dev/null
 echo "Check completed"
 
 # Build the crate
-SB2_TARGET=%SB2_TARGET" RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
+SB2_TARGET="%SB2_TARGET" RUST_BACKTRACE=1 CARGO_TARGET_DIR="%BUILD_DIR" cargo --offline build --release -vv
 
 # Build the test c++ file
 #host-g++ -isystem "%BUILD_DIR"/include/ ../test/test.cpp -o "%BUILD_DIR"/test
