@@ -46,12 +46,11 @@ mkdir -p "%BUILD_DIR"
 %ifarch %arm
 echo Creating include link in "%BUILD_DIR"/include
 if [ ! -L "%BUILD_DIR"/include ] ; then ln -s /usr/include/c++/8.3.0/ "%BUILD_DIR"/include; fi
-%endif
-
 echo "Target include contents"
 ls -l "%BUILD_DIR"/include/
 echo "Tooling include contents"
 SBOX_DISABLE_MAPPING=1 ls -l "%BUILD_DIR"/include/
+%endif
 
 echo "Check for cc1plus in the target"
 echo "/usr"
