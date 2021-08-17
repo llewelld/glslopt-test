@@ -42,6 +42,24 @@ find -L ../vendor -mindepth 2 -maxdepth 2 -type f -name Cargo.toml \
 
 mkdir -p "%BUILD_DIR"
 
+%ifarch %arm
+
+# hack to circumvent liblang.so.10 incorrect architecture bug JB#55042
+echo "########################"
+echo "Before"
+objdump -a /usr/lib/libclang.so.10
+
+%define TARGET_DIR /target
+#%define TARGET_DIR /srv/mer/targets/SailfishOS-latest-armv7hl.default
+
+SBOX_DISABLE_MAPPING=1 cp /usr/lib/libclang.so.10 "%TARGET_DIR"/usr/lib/libclang.so.10
+
+echo "After"
+objdump -a /usr/lib/libclang.so.10
+echo "########################"
+
+%endif
+
 # Create a link to the stdc++ include directory
 %ifarch %arm
 echo Creating include link in "%BUILD_DIR"/include
