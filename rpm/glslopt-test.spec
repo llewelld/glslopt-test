@@ -50,7 +50,6 @@ echo "Before"
 objdump -a /usr/lib/libclang.so.10
 
 %define TARGET_DIR /target
-#%define TARGET_DIR /srv/mer/targets/SailfishOS-latest-armv7hl.default
 
 SBOX_DISABLE_MAPPING=1 cp /usr/lib/libclang.so.10 "%TARGET_DIR"/usr/lib/libclang.so.10
 
